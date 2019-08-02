@@ -58,11 +58,10 @@ def object_detection_api(img_path, model, threshold=0.99, use_cuda=False, text_t
     for i in range(len(boxes)):
         cv2.rectangle(img, boxes[i][0], boxes[i][1], color=(0,255,0), thickness=rect_th)
         cv2.putText(img, pred_cls[i], boxes[i][0], cv2.FONT_HERSHEY_SIMPLEX, text_size, (0, 255 ,0), thickness=text_th)
-    plt.figure(figsize=(20,30)) # display the output image
-    plt.imshow(img)
-    plt.xticks([])
-    plt.yticks([])
-    plt.show()
+    print(type(img))
+    print()
+    print(os.getcwd() + '/static/detected_img/' + img_path.split('/')[-1])
+    cv2.imwrite(os.getcwd() + '/static/detected_img/' + img_path.split('/')[-1], img)
 
 
 def main(img_path):
@@ -70,8 +69,7 @@ def main(img_path):
     model.eval()
     # print(model)
 
-    print('Root dir: ', os.getcwd())
-    print()
+    print(img_path)
 
     use_cuda = torch.cuda.is_available()
     # print(img.shape)

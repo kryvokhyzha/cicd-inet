@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Detector
+{% endblock %}
+
+{% block content_title %}
+    Upload file to detect:
+{% endblock %}
+
+{% block content_left %}
+    <div class="clear"><br/></div>
+
+    <form id="upload-form" action="{{ url_for('detector') }}" method="POST" enctype="multipart/form-data">
+        <input class="custom-file-input" type="file" name="file" accept="image/*">
+
+        <div class="clear"><br/></div>
+
+        <input class="fsSubmitButton" type="submit" value="Send" multiple>
+    </form>
+{% endblock %}
+
+{% block content_right %}
+    {% if is_post %}
+        <h3 align="center">Uploaded image</h3>
+        <div class="clear"><br/></div>
+        <img width="75%" src="{{ url_for('static', filename=path_upload_img) }}"><br>
+
+        <div class="clear"><br/></div>
+        <div class="clear"><br/></div>
+
+        <h3 align="center">Processed image</h3>
+        <div class="clear"><br/></div>
+        <img width="75%" src="{{ url_for('static', filename=path_detect_img) }}"><br>
+    {% endif %}
+{% endblock %}

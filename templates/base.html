@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+
+		<title>
+            Roma Kryvokhyzha |
+            {% block title %}
+
+            {% endblock %}
+        </title>
+
+		{% block style %}
+
+		{% endblock %}
+
+		<script type="text/javascript" src="{{ url_for('static', filename='js/bar.js') }}"></script>
+
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="icon" sizes="32x32" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}">
+
+		{% block style2 %}
+
+		{% endblock %}
+	</head>
+
+	<body>
+
+		<header>
+				<a href="{{ url_for('index') }}" title="General page" id="logo">General page</a>
+                <a id="logo">|</a>
+                <a href="{{ url_for('about') }}" title="About" id="logo">About</a>
+				<span class="right">
+						<span id="FaceDetection"> <a href="{{ url_for('detector') }}" title="Image detector">Image detector<span class="more"> &gt; </span></a></span>
+				</span>
+			</header>
+
+		<div id="page_loading" class="light">
+        	<div class="loader"><div><div></div></div></div>
+        	<noscript>
+            	<div class="nojs">Please enable <strong>JavaScript</strong> and reload this page
+                	<p><a href="http://goo.gl/d5o4zF" target="_blank" rel="nofollow">How enable Javascript</a></p>
+            	</div>
+        	</noscript>
+    	</div>
+
+		<div id="page-wrap">
+			<div class="clear"><br/></div>
+			<article>
+				<div id="left_side">
+                    <!-- Текст для левой стороны -->
+                   <div>
+                        <h1>
+                            {% block content_title %}
+                            {% endblock %}
+                        </h1>
+                    </div>
+
+                    <div>
+                        {% block content_left %}
+                        {% endblock %}
+                    </div>
+				</div>
+
+				<div id="right_side">
+					<div>
+						{% block content_right %}
+                        {% endblock %}
+					</div>
+
+				</div>
+			</article>
+
+		</div>
+
+		<footer>
+            <script>
+                var year = (new Date()).getFullYear()
+                document.write("<p>&copy; " + year + ". By Roman Kryvokhyzha</p>")
+            </script>
+		</footer>
+	</body>
+</html>
