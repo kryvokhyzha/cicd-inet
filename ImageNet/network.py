@@ -39,6 +39,8 @@ def get_prediction(img_path, threshold, model, transform=None, use_cuda=False):
 
     # img = img.unsqueeze(1).float().view(_, 3, 800, 800)
 
+    # print(model)
+
     pred = model([img])
     pred_class = [COCO_INSTANCE_CATEGORY_NAMES[i] for i in list(pred[0]['labels'].numpy())] # Get the Prediction Score
     pred_boxes = [[(i[0], i[1]), (i[2], i[3])] for i in list(pred[0]['boxes'].detach().numpy())] # Bounding boxes
@@ -64,8 +66,9 @@ def object_detection_api(img_path, model, threshold=0.99, use_cuda=False, text_t
     cv2.imwrite(os.getcwd() + '/static/detected_img/' + img_path.split('/')[-1], img)
 
 
-def main(img_path):
-    model = models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
+def main(img_path, model):
+    # model = models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
+    # model.load_state_dict(torch.load('model/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth'))
     model.eval()
     # print(model)
 

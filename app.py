@@ -5,6 +5,7 @@ from flask import Flask
 from flask import render_template, request
 
 from ImageNet.network import main
+from torchvision import models
 # import ImageNet
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -12,6 +13,8 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 
 signal.signal(signal.SIGINT, lambda s, f: os._exit(0))
+
+model = models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
 
 
 @app.after_request
@@ -53,7 +56,7 @@ def detector():
 
             file.save(destination)
 
-            main(destination)
+            main(destination, model)
 
             path_detect_img = 'detected_img/' + filename
             path_upload_img = 'upload_img/' + filename
