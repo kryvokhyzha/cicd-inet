@@ -18,4 +18,9 @@ script:
     - python -m pytest -v
 
 after_success:
-  - sh .travis/deploy_dockerhub.sh
+    - echo 'start'
+    - ls
+    - echo 'cd'
+    - cd ..
+    - ls
+    - sh .travis/deploy_dockerhub.sh
