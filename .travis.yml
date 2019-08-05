@@ -18,4 +18,4 @@ script:
 
 after_success:
     - sh .travis/deploy_dockerhub.sh
-    - test “$TRAVIS_BRANCH” = “master” && test "$TRAVIS_PULL_REQUEST" = "false" && sh .travis/deploy_heroku.sh && wget -P /root/.cache/torch/checkpoints/ https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth
+    - test “$TRAVIS_BRANCH” = “master” && test "$TRAVIS_PULL_REQUEST" = "false" && sh .travis/deploy_heroku.sh
