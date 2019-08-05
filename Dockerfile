@@ -20,11 +20,12 @@ RUN pip install pyserial
 RUN pip install -r /src/requirements.txt
 
 COPY app.py /src
+COPY pre_build_model.py /src
 COPY ImageNet /src/ImageNet
 COPY static /src/static
 COPY templates /src/templates
 
-RUN wget -P /root/.cache/torch/checkpoints/ https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth
+CMD python3 /src/pre_build_model.py
 
 CMD python3 /src/app.py
 
