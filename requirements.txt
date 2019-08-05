@@ -1,6 +1,6 @@
+opencv-python
 torch
 torchvision
-opencv-python
 matplotlib
 pytest==3.0.6
 Flask
