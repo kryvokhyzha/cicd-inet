@@ -69,4 +69,4 @@ def detector():
 
 if __name__ == '__main__':
     print(os.getcwd())
-    app.run(host='0.0.0.0', port=os.getenv('PORT'))
+    app.run(host='0.0.0.0', port=os.getenv('PORT'), debug=True)
