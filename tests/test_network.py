@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from ImageNet.network import get_prediction
+from app.ImageNet.network import get_prediction
 from torchvision import models
 
 

@@ -9,7 +9,8 @@ from ImageNet.network import main
 from torchvision import models
 # import ImageNet
 
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+# APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+APP_ROOT = os.getcwd()
 
 app = Flask(__name__)
 
@@ -75,5 +76,4 @@ def detector():
 
 
 if __name__ == '__main__':
-    print(os.getcwd())
     app.run(host='0.0.0.0', port=os.getenv('PORT'), debug=True)
