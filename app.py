@@ -1,5 +1,6 @@
 import os
 import signal
+import uuid
 
 from flask import Flask
 from flask import render_template, request
@@ -15,6 +16,7 @@ app = Flask(__name__)
 signal.signal(signal.SIGINT, lambda s, f: os._exit(0))
 
 model = models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
+model.eval()
 
 
 @app.after_request
@@ -47,12 +49,16 @@ def detector():
         target = os.path.join(APP_ROOT, 'static/upload_img/')
         print(target)
 
+        if 'file' not in request.files:
+            print('file was not uploaded')
+
+            return render_template('detector.html', is_post=False)
+
         for file in request.files.getlist('file'):
-            print(file)
-            filename = file.filename
+            filename = str(uuid.uuid4()) + '_' + file.filename
 
             destination = ''.join([target, filename])
-            print(destination)
+            print('destination:', destination)
 
             file.save(destination)
 
@@ -62,7 +68,8 @@ def detector():
             path_upload_img = 'upload_img/' + filename
 
             return render_template('detector.html', is_post=True,
-                                   path_detect_img=path_detect_img, path_upload_img=path_upload_img)
+                                    path_detect_img=path_detect_img,
+                                    path_upload_img=path_upload_img)
     else:
         return render_template('detector.html', is_post=False)
 
