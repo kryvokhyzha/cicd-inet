@@ -23,6 +23,4 @@ RUN pip -V
 RUN pip install pyserial
 RUN pip install -r /src/requirements.txt
 
-EXPOSE 5000
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app", "--timeout", "240", "--graceful-timeout", "180"]
-
+CMD gunicorn --bind 0.0.0.0:$PORT app:app --timeout 240
